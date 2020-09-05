@@ -1,5 +1,6 @@
 package my.personal.dao.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,8 +9,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import my.personal.dao.TaskRepo;
 import my.personal.entity.Task;
+import my.personal.entity.TaskHistory;
 
 @Repository
 public class TaskRepoImpl{
@@ -28,6 +29,6 @@ public class TaskRepoImpl{
         Query q = entityManager.createNativeQuery("select id, task_name, description from ijournal.task", Task.class);
 
         return q.getResultList();
-    }   
+    }
 
 }

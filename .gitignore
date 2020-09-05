@@ -1,0 +1,5 @@
+
+.metadata/*
+iJournal-service/.mvn/*
+iJournal-service/mvnw
+iJournal-service/mvnw.cmd

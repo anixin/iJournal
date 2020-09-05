@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import my.personal.dao.TaskRepo;
 import my.personal.dao.impl.TaskRepoImpl;
 import my.personal.entity.Task;
 
@@ -23,5 +22,4 @@ public class TaskService {
     public List<Task> getAllTasks() {
         return taskRepo.getTasks();
     }
-
 }
