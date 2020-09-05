@@ -17,11 +17,7 @@ public class ScheduleService {
 
     @Transactional
     public void addTodaySchedule (final List<TaskHistory> todaysScheduleList) throws Exception{
-        try{
-            scheduleRepo.addTodaySchedule(todaysScheduleList);
-        }catch(Exception e){
-            throw e;
-        }
+        scheduleRepo.addTodaySchedule(todaysScheduleList);
     }
 
     public List<TaskHistory> getTaskHistory(String taskName) {

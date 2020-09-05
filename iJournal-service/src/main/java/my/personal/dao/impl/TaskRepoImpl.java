@@ -1,6 +1,5 @@
 package my.personal.dao.impl;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import my.personal.entity.Task;
-import my.personal.entity.TaskHistory;
 
 @Repository
 public class TaskRepoImpl{
