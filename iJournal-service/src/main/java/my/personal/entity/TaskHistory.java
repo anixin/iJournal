@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "schedule_hist")
 public class TaskHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +22,8 @@ public class TaskHistory {
     private int timeCommitted;
     @Column(name = "actual_time_mins")
     private int actualTime;
+    @Column(name = "to_do")
+    private String toDo;
     @Column(name = "work_done")
     private String workDone;
     @Column(name = "work_for_next_time")
@@ -81,6 +83,14 @@ public class TaskHistory {
 
     public void setToBeDoneNext(String toBeDoneNext) {
         this.toBeDoneNext = toBeDoneNext;
+    }
+
+    public String getToDo() {
+        return toDo;
+    }
+
+    public void setToDo(String toDo) {
+        this.toDo = toDo;
     }
 
     

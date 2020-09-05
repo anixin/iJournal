@@ -2,6 +2,7 @@ package my.personal.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import my.personal.dao.impl.ScheduleRepo;
 import my.personal.entity.TaskHistory;
@@ -13,6 +14,15 @@ import java.util.List;
 public class ScheduleService {
     @Autowired
     public ScheduleRepo scheduleRepo;
+
+    @Transactional
+    public void addTodaySchedule (final List<TaskHistory> todaysScheduleList) throws Exception{
+        try{
+            scheduleRepo.addTodaySchedule(todaysScheduleList);
+        }catch(Exception e){
+            throw e;
+        }
+    }
 
     public List<TaskHistory> getTaskHistory(String taskName) {
         return scheduleRepo.getTaskHistory(taskName);
