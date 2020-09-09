@@ -11,13 +11,17 @@ export class HomeComponent implements OnInit {
   public schedule: any = [];
 
   ngOnInit() {
-    this.schedule.push({
+    /* this.schedule.push({
       toDo: "Do Leetcode",
       timeCommitted: '15 mins'
-    });
+    }); */
   }
 
   addTask() {
+    this.schedule.push({
+      toDo: "",
+      timeCommitted: ""
+    });
   }
 
 }
