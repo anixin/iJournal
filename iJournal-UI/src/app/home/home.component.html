@@ -1,0 +1,21 @@
+<div class="main container-fluid">
+  <form #scheduleForm="ngForm">
+    <!-- <select [(ngModel)]="task.task">
+        <option></option>
+      </select> -->
+    <table>
+      <!-- <ng-template pTemplate="body"> -->
+        <tr *ngFor="let task of schedule; let i = index">
+          <h1></h1>
+          <td> <input type="text" [(ngModel)]="task.toDo" name = "toDo"> </td>
+          <td> <input type="text" disabled [(ngModel)]="task.timeCommitted" name="timeCommitted"> </td>
+          <td> <img src="../assets/start-icon.png" height="35px" width="35px"> </td>
+          <td> <img src="../assets/pause-icon.png" height="35px" width="35px"> </td>
+          <td> <img src="../assets/stop-icon.png" height="35px" width="35px"> </td>
+        </tr>
+     <!--  </ng-template> -->
+    </table>
+    <img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()">
+  </form>
+
+</div>
