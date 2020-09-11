@@ -8,10 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import my.personal.entity.Task;
 import my.personal.service.TaskService;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class TaskController {
 
