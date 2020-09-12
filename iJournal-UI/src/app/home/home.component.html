@@ -6,8 +6,8 @@
     <table>
       <tr *ngFor="let task of schedule; let i = index">
         <td>
-          <select [(ngModel)]="schedule.task" name="taskCategory_{{i}}">
-            <option *ngFor = "let category of taskCategory" [value]="category.taskName">{{category.taskName}}</option>
+          <select [(ngModel)]="task.taskName" name="taskCategory_{{i}}">
+            <option *ngFor="let category of taskCategory" [value]="category.taskName">{{category.taskName}}</option>
           </select>
         </td>
         <td> <input type="text" [(ngModel)]="task.toDo" name="toDo_{{i}}"> </td>
@@ -16,8 +16,12 @@
         <td> <img src="../assets/pause-icon.png" height="35px" width="35px"> </td>
         <td> <img src="../assets/stop-icon.png" height="35px" width="35px"> </td>
       </tr>
+      <tr>
+        <td><img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()"></td>
+        <td><button type="submit" (click)="saveSchedule()">Save</button></td>
+      </tr>
     </table>
-    <img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()">
+    
   </form>
 
 </div>

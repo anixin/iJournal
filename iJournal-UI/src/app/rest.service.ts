@@ -9,13 +9,28 @@ import { map, catchError, tap } from 'rxjs/operators';
 export class RestService {
 
   private getAllTaskCategoryQ = 'http://localhost:8080/getAllTasks';
+  private saveTodaysScheduleQ = 'http://localhost:8080/addTodaysSchedule';
 
   constructor(private http: HttpClient) { }
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-  public getAllTaskService(){
+  public getAllTaskService() {
     return this.http.get(this.getAllTaskCategoryQ)/* .pipe(
       map(this.extractData),
       // ,catchError
-    )*/; 
+    )*/;
+  }
+
+  public saveTodaysScheduleService(scheduleList) {
+    console.log("saewwdvf clicked in swervicwe");
+    let data = this.http.post(this.saveTodaysScheduleQ, JSON.stringify(
+      scheduleList
+    ), this.httpOptions);
+    console.log(JSON.stringify(scheduleList));
+    return data;
   }
 }
