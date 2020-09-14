@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   public timeLeft;
   public interval;
   public isSaved = false;
+  public taskCompleted = false;
   public message;
   ngOnInit() {
     this.getAllTaskCategory();
@@ -52,6 +53,18 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  updateSchedule(){
+    let completedTaskList = [];
+    this.schedule.forEach(element => {
+      if(element.isCompleted)
+        completedTaskList.push(element);
+    });
+
+    this.service.updateTasksService(completedTaskList).subscribe((data) => {
+      console.log(data);
+    });
+  }
+
   startTimer(i){
     let task = this.schedule[i];
     this.timeLeft = this.timeLeft ? this.timeLeft : task.timeCommitted * 60;
@@ -63,13 +76,22 @@ export class HomeComponent implements OnInit {
         clearInterval(this.interval);
         task.isCompleted = true;
         this.timeLeft = null;
+        this.taskUpdated();
       }
-    },1000)
+    },1000);
   }
 
   pauseTimer(){
     console.log(this.timeLeft);
     clearInterval(this.interval);
+  }
+
+  taskUpdated(){
+    this.schedule.forEach(element => {
+      if(element.isCompleted){
+        this.taskCompleted = true;
+      }
+    });
   }
 
 }

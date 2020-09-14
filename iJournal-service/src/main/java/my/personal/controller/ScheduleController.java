@@ -46,4 +46,16 @@ public class ScheduleController {
     public ResponseEntity<Object> getDayBatchHistory(@RequestBody Date startDate, @RequestBody Date endDate) {
         return new ResponseEntity<>(scheduleService.getDayBatchHistory(startDate, endDate), HttpStatus.OK);
     }
+
+    @PostMapping(value = "/updateTasks")
+    public ResponseEntity<Object> updateTasks(@RequestBody final List<TaskHistory> taskList){
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            scheduleService.updateTasks(taskList);
+            return new ResponseEntity<>(mapper.writeValueAsString("Tasks Saved"), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+
+        }
+    } 
 }

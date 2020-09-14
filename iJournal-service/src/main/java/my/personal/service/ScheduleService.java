@@ -27,4 +27,9 @@ public class ScheduleService {
     public List<TaskHistory> getDayBatchHistory(Date startDate, Date endDate) {
         return scheduleRepo.getDayBatchHistory(startDate, endDate);
     }
+
+    @Transactional
+    public void updateTasks(final List<TaskHistory> taskList) throws Exception {
+        scheduleRepo.updateTasks(taskList);
+    }
 }
