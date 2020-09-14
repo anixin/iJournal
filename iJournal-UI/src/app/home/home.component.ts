@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   public schedule: any = [];
   public taskCategory: any = [];
   private myDate = new Date();
+  public timeLeft;
+  public interval;
+  public isSaved = false;
+  public message;
   ngOnInit() {
     this.getAllTaskCategory();
   }
@@ -36,14 +40,36 @@ export class HomeComponent implements OnInit {
       workDone: "",
       toBeDoneNext: "",
       actualTime: 5,
+      isCompleted: false
     });
   }
 
   saveSchedule(){
     console.log("saewwdvf clicked");
-    this.service.saveTodaysScheduleService(this.schedule).subscribe((data => {
-      console.log(data);
-    }));
+    this.service.saveTodaysScheduleService(this.schedule).subscribe((data) => {
+      this.message = data;
+      this.isSaved = true;
+    });
+  }
+
+  startTimer(i){
+    let task = this.schedule[i];
+    this.timeLeft = this.timeLeft ? this.timeLeft : task.timeCommitted * 60;
+    this.interval = setInterval(() => {
+      if(this.timeLeft > 0)
+        this.timeLeft --;
+      else{
+        alert("Task completed: "+ task.taskName)
+        clearInterval(this.interval);
+        task.isCompleted = true;
+        this.timeLeft = null;
+      }
+    },1000)
+  }
+
+  pauseTimer(){
+    console.log(this.timeLeft);
+    clearInterval(this.interval);
   }
 
 }

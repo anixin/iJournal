@@ -5,23 +5,32 @@
       </select> -->
     <table>
       <tr *ngFor="let task of schedule; let i = index">
+        <td><input type="checkbox" [(ngModel)]="task.isCompleted" name="isCompleted{{i}}"> </td>
         <td>
-          <select [(ngModel)]="task.taskName" name="taskCategory_{{i}}">
+          <select [(ngModel)]="task.taskName" name="taskCategory{{i}}">
             <option *ngFor="let category of taskCategory" [value]="category.taskName">{{category.taskName}}</option>
           </select>
         </td>
-        <td> <input type="text" [(ngModel)]="task.toDo" name="toDo_{{i}}"> </td>
-        <td> <input type="number" [(ngModel)]="task.timeCommitted" name="timeCommitted_{{i}}"> </td>
-        <td> <img src="../assets/start-icon.png" height="35px" width="35px"> </td>
-        <td> <img src="../assets/pause-icon.png" height="35px" width="35px"> </td>
-        <td> <img src="../assets/stop-icon.png" height="35px" width="35px"> </td>
+        <td> <input type="text" [(ngModel)]="task.toDo" name="toDo{{i}}" placeholder="Task for today"> </td>
+        <td> <input type="number" [(ngModel)]="task.timeCommitted" name="timeCommitted_{{i}}"
+            placeholder="Time to commit (in minutes)"> </td>
+        <td> <input type="text" [(ngModel)]="task.toBeDoneNext" name="workDone{{i}}" [(disabled)]="!task.isCompleted"
+            placeholder="Task for next time"> </td>
+        <td> <input type="text" [(ngModel)]="task.workDone" name="toBeDoneNext{{i}}" [(disabled)]="!task.isCompleted"
+            placeholder="Work Done"> </td>
+        <td> <img src="../assets/start-icon.png" height="28px" width="28px" (click)="startTimer(i)"> </td>
+        <td> <img src="../assets/pause-icon.png" height="28px" width="28px" (click)="pauseTimer()"> </td>
       </tr>
       <tr>
         <td><img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()"></td>
-        <td><button type="submit" (click)="saveSchedule()">Save</button></td>
+        <td><button type="submit" (click)="saveSchedule()" [disabled]="isSaved">Save</button></td>
+        <td><button type="update" (click)="updateSchedule()">Update</button></td>
       </tr>
     </table>
-    
+
   </form>
+  <div>
+    <p>{{message}} </p>
+  </div>
 
 </div>

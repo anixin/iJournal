@@ -10,6 +10,7 @@ export class RestService {
 
   private getAllTaskCategoryQ = 'http://localhost:8080/getAllTasks';
   private saveTodaysScheduleQ = 'http://localhost:8080/addTodaysSchedule';
+  private getTaskHistoryQ = 'http://localhost:8080/getTaskHistory';
 
   constructor(private http: HttpClient) { }
   private httpOptions = {
@@ -26,11 +27,13 @@ export class RestService {
   }
 
   public saveTodaysScheduleService(scheduleList) {
-    console.log("saewwdvf clicked in swervicwe");
     let data = this.http.post(this.saveTodaysScheduleQ, JSON.stringify(
       scheduleList
     ), this.httpOptions);
-    console.log(JSON.stringify(scheduleList));
     return data;
+  }
+
+  public getTaskHistoryService(task){
+    
   }
 }
