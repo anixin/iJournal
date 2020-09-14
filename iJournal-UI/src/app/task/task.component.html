@@ -1,11 +1,14 @@
 <div class="main container-fluid">
-  <mat-card class="task-card" *ngFor="let taskCategory of taskCategoryList; let i = index">
-    <div class="category">
-      <mat-card-header>
-        <mat-card-title>{{taskCategory.taskName}}</mat-card-title>
-        <mat-card-subtitle>{{taskCategory.description}} </mat-card-subtitle>
-      </mat-card-header>
-    </div>
-    
-  </mat-card>
+  <div class="blah-list" >
+    <mat-card class="task-card" *ngFor="let taskCategory of taskCategoryList; let i = index">
+      <div class="category" (click)="getTaskHistory(taskCategory.taskName)">
+        <mat-card-header>
+          <mat-card-title>{{taskCategory.taskName}}</mat-card-title>
+         <mat-card-subtitle>{{taskCategory.description}} </mat-card-subtitle>
+        </mat-card-header>
+      </div>
+
+    </mat-card>
+  </div>
+
 </div>

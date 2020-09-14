@@ -10,6 +10,9 @@ import { TaskComponent } from './task/task.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
+import { TaskHistoryComponent } from './task-history/task-history.component';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
@@ -18,7 +21,8 @@ import {MatCardModule} from '@angular/material/card';
     SidePanelComponent,
     HomeComponent,
     TaskComponent,
-    DashboardComponent
+    DashboardComponent,
+    TaskHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +30,9 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatCardModule
+    MatListModule,
+    MatCardModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

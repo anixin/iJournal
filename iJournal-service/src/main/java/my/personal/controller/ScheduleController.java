@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -30,14 +31,14 @@ public class ScheduleController {
         ObjectMapper mapper = new ObjectMapper();
         try {
             scheduleService.addTodaySchedule(todaysScheduleList);
-            return new ResponseEntity<>(mapper.writeValueAsString("Saved Successfully"), HttpStatus.OK);
+            return new ResponseEntity<>(mapper.writeValueAsString("Tasks Saved"), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @GetMapping(value = "/getTaskHistory")
-    public ResponseEntity<Object> getTaskHistory(@RequestBody String taskName) {
+    @GetMapping(value = "/getTaskHistory/{taskName}")
+    public ResponseEntity<Object> getTaskHistory(@PathVariable String taskName) {
         return new ResponseEntity<>(scheduleService.getTaskHistory(taskName), HttpStatus.OK);
     }
 
