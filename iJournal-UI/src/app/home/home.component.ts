@@ -41,7 +41,8 @@ export class HomeComponent implements OnInit {
       workDone: "",
       toBeDoneNext: "",
       actualTime: 5,
-      isCompleted: false
+      isCompleted: false,
+      timeLeft: ""
     });
   }
 

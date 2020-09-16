@@ -13,6 +13,7 @@ import {MatCardModule} from '@angular/material/card';
 import { TaskHistoryComponent } from './task-history/task-history.component';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { MinuteSecondPipe } from './minute-second.pipe';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     HomeComponent,
     TaskComponent,
     DashboardComponent,
-    TaskHistoryComponent
+    TaskHistoryComponent,
+    MinuteSecondPipe
   ],
   imports: [
     BrowserModule,
