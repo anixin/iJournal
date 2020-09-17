@@ -12,6 +12,7 @@ export class RestService {
   private saveTodaysScheduleQ = 'http://localhost:8080/addTodaysSchedule';
   private getTaskHistoryQ = 'http://localhost:8080/getTaskHistory/';
   private updateTasksQ = 'http://localhost:8080/updateTasks'
+  private getWorkToDoQ = 'http://localhost:8080/getWorkToDo?taskCategory=';
 
   constructor(private http: HttpClient) { }
   private httpOptions = {
@@ -40,4 +41,8 @@ export class RestService {
 
     return data;
   }
+  public getWorkToDoService(task){
+    return this.http.get(this.getWorkToDoQ + task);
+  }
+
 }

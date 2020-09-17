@@ -3,6 +3,7 @@ package my.personal.controller;
 import java.sql.Date;
 import java.util.List;
 
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -58,4 +59,16 @@ public class ScheduleController {
 
         }
     } 
+
+    @GetMapping(value = "/getWorkToDo")
+    public ResponseEntity<Object> getWorkToDo(@QueryParam("taskCategory") String taskCategory) {
+        ObjectMapper mapper = new ObjectMapper();
+        try{
+            String response = scheduleService.getWorkToDo(taskCategory);
+            return new ResponseEntity<>(mapper.writeValueAsString(response) , HttpStatus.OK);
+        }   catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

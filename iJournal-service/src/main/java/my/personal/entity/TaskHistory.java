@@ -21,8 +21,6 @@ public class TaskHistory implements Serializable {
     private Date date;
     @Column(name = "committed_time_mins")
     private int timeCommitted;
-    @Column(name = "actual_time_mins")
-    private int actualTime;
     @Column(name = "to_do")
     private String toDo;
     @Column(name = "work_done")
@@ -62,13 +60,6 @@ public class TaskHistory implements Serializable {
         this.timeCommitted = timeCommitted;
     }
 
-    public int getActualTime() {
-        return actualTime;
-    }
-
-    public void setActualTime(int actualTime) {
-        this.actualTime = actualTime;
-    }
 
     public String getWorkDone() {
         return workDone;

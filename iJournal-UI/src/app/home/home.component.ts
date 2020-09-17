@@ -11,12 +11,12 @@ import { DatePipe } from '@angular/common';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private service : RestService, private router: Router,private datePipe: DatePipe) { }
+  constructor(private service: RestService, private router: Router, private datePipe: DatePipe) { }
   public schedule: any = [];
   public taskCategory: any = [];
   private myDate = new Date();
   public timeLeft;
-  public interval;
+  public interval = [];
   public isSaved = false;
   public taskCompleted = false;
   public message;
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
     this.getAllTaskCategory();
   }
 
-  getAllTaskCategory(){
+  getAllTaskCategory() {
     this.service.getAllTaskService().subscribe((data) => {
       this.taskCategory = data;
     });
@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit {
   }
 
   addTask() {
-    console.log(this.schedule);
     this.schedule.push({
       taskName: "",
       toDo: "",
@@ -40,13 +39,12 @@ export class HomeComponent implements OnInit {
       date: this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),
       workDone: "",
       toBeDoneNext: "",
-      actualTime: 5,
       isCompleted: false,
       timeLeft: ""
     });
   }
 
-  saveSchedule(){
+  saveSchedule() {
     console.log("saewwdvf clicked");
     this.service.saveTodaysScheduleService(this.schedule).subscribe((data) => {
       this.message = data;
@@ -54,10 +52,10 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  updateSchedule(){
+  updateSchedule() {
     let completedTaskList = [];
     this.schedule.forEach(element => {
-      if(element.isCompleted)
+      if (element.isCompleted)
         completedTaskList.push(element);
     });
 
@@ -66,32 +64,40 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  startTimer(i){
+  startTimer(i) {
     let task = this.schedule[i];
-    this.timeLeft = this.timeLeft ? this.timeLeft : task.timeCommitted * 60;
-    this.interval = setInterval(() => {
-      if(this.timeLeft > 0)
-        this.timeLeft --;
-      else{
-        alert("Task completed: "+ task.taskName)
-        clearInterval(this.interval);
+
+    this.schedule[i].timeLeft = this.schedule[i].timeLeft ? this.schedule[i].timeLeft: task.timeCommitted * 60;
+    this.interval[i] = setInterval(() => {
+      if (this.schedule[i].timeLeft > 0)
+        this.schedule[i].timeLeft--;
+      else {
+        alert("Task completed: " + task.taskName)
+        clearInterval(this.interval[i]);
         task.isCompleted = true;
-        this.timeLeft = null;
+        this.schedule[i].timeLeft = null;
         this.taskUpdated();
       }
-    },1000);
+    }, 1000);
   }
 
-  pauseTimer(){
-    console.log(this.timeLeft);
-    clearInterval(this.interval);
+  pauseTimer(i) {
+    clearInterval(this.interval[i]);
   }
 
-  taskUpdated(){
+  taskUpdated() {
     this.schedule.forEach(element => {
-      if(element.isCompleted){
+      if (element.isCompleted) {
         this.taskCompleted = true;
       }
+    });
+  }
+
+  onTaskChange(i){
+    let w2D;
+    this.service.getWorkToDoService(this.schedule[i].taskName).subscribe((data) =>{
+      w2D = data;
+      this.schedule[i].toDo = w2D;
     });
   }
 

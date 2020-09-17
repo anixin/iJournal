@@ -46,14 +46,13 @@ public class ScheduleRepo {
     public void updateTasks(final List<TaskHistory> taskList) throws Exception {
         try {
             Query q = entityManager.createNativeQuery(
-                    "UPDATE ijournal.schedule_hist SET work_for_next_time= ?, work_done=?, actual_time_mins=? WHERE date = ? AND task = ?");
+                    "UPDATE ijournal.schedule_hist SET work_for_next_time= ?, work_done=? WHERE date = ? AND task = ?");
 
             for (TaskHistory task : taskList) {
                 q.setParameter(1, task.getToBeDoneNext());
                 q.setParameter(2, task.getWorkDone());
-                q.setParameter(3, task.getActualTime());
-                q.setParameter(4, task.getDate());
-                q.setParameter(5, task.getTaskName());
+                q.setParameter(3, task.getDate());
+                q.setParameter(4, task.getTaskName());
 
                 q.executeUpdate();
             }
@@ -61,6 +60,13 @@ public class ScheduleRepo {
             e.printStackTrace();
             throw new Exception("Error updating data");
         }
+
+    }
+
+    public String getWorkToDo(String taskCategory){
+        Query q = entityManager.createNativeQuery("select work_for_next_time from schedule_hist where task = ? order by date desc limit 1");
+        q.setParameter(1, taskCategory);
+        return q.getSingleResult().toString();
 
     }
 }

@@ -32,4 +32,8 @@ public class ScheduleService {
     public void updateTasks(final List<TaskHistory> taskList) throws Exception {
         scheduleRepo.updateTasks(taskList);
     }
+    
+    public String getWorkToDo(String taskCategory){
+        return scheduleRepo.getWorkToDo(taskCategory);
+    }
 }
