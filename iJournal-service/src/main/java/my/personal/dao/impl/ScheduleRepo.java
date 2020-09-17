@@ -36,7 +36,7 @@ public class ScheduleRepo {
 
     public List<TaskHistory> getDayBatchHistory(final Date startDate, final Date endDate) {
         final Query q = entityManager.createNativeQuery(
-                "select * from ijournal.schedule_hist WHERE date BETWEEN ? AND ?", TaskHistory.class);
+                "select * from ijournal.schedule_hist WHERE date BETWEEN ? AND ? order by date", TaskHistory.class);
         q.setParameter(1, startDate);
         q.setParameter(2, endDate);
 

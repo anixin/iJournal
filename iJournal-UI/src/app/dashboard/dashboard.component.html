@@ -1,5 +1,14 @@
 <div class="main container-fluid">
-  <p>
-    dashboard works!
-  </p>
-</div>  
+  <mat-list>
+      <div *ngFor="let taskHistory of taskHistoryList">
+          <mat-expansion-panel  style="cursor: pointer; margin-top: 1rem;">
+              <mat-expansion-panel-header><h4>{{taskHistory.date}}</h4></mat-expansion-panel-header>
+              <mat-list-item> Work Done: {{taskHistory.workDone}} </mat-list-item>
+              <div class="time-div">
+                  <mat-list-item> Time Committed: {{taskHistory.timeCommitted}} </mat-list-item>
+              </div>
+          </mat-expansion-panel>
+
+      </div>
+  </mat-list>
+</div>

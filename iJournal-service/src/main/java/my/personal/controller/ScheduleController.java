@@ -44,7 +44,7 @@ public class ScheduleController {
     }
 
     @GetMapping(value = "/getDayBatchHistory")
-    public ResponseEntity<Object> getDayBatchHistory(@RequestBody Date startDate, @RequestBody Date endDate) {
+    public ResponseEntity<Object> getDayBatchHistory(@QueryParam("startDate") Date startDate, @QueryParam("endDate") Date endDate) {
         return new ResponseEntity<>(scheduleService.getDayBatchHistory(startDate, endDate), HttpStatus.OK);
     }
 

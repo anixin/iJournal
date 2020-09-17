@@ -32,6 +32,7 @@ export class HomeComponent implements OnInit {
   }
 
   addTask() {
+    console.log(this.schedule);
     this.schedule.push({
       taskName: "",
       toDo: "",
@@ -82,6 +83,7 @@ export class HomeComponent implements OnInit {
   }
 
   pauseTimer(i) {
+    console.log(this.schedule[i].timeLeft)
     clearInterval(this.interval[i]);
   }
 
@@ -94,6 +96,7 @@ export class HomeComponent implements OnInit {
   }
 
   onTaskChange(i){
+    console.log(this.schedule[i].taskName);
     let w2D;
     this.service.getWorkToDoService(this.schedule[i].taskName).subscribe((data) =>{
       w2D = data;
