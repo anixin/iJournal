@@ -14,6 +14,7 @@ export class RestService {
   private updateTasksQ = 'http://localhost:8080/updateTasks'
   private getWorkToDoQ = 'http://localhost:8080/getWorkToDo?taskCategory=';
   private getDayBatchHistoryQ = 'http://localhost:8080/getDayBatchHistory?';
+  private getTodayScheduleQ = 'http://localhost:8080/getTodaySchedule?date=';
 
   constructor(private http: HttpClient) { }
   private httpOptions = {
@@ -37,6 +38,11 @@ export class RestService {
   public getTaskHistoryService(task) {
     return this.http.get(this.getTaskHistoryQ + task);
   }
+
+  public getTodayScheduleService(date) {
+    return this.http.get(this.getTodayScheduleQ + date);
+  }
+
   public updateTasksService(taskList) {
     let data = this.http.post(this.updateTasksQ, JSON.stringify(taskList), this.httpOptions);
 

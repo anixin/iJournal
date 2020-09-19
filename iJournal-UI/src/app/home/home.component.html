@@ -43,7 +43,7 @@
 
     </mat-card>
     <div>
-      <img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()">
+      <img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()" *ngIf = 'isSaved'>
     </div>
     <div *ngIf = "schedule.length > 0">
       <button type="submit" (click)="saveSchedule()" [disabled]="isSaved">Save</button>

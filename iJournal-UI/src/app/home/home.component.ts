@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   public message;
   ngOnInit() {
     this.getAllTaskCategory();
+    this.getTodaySchedule();
   }
 
   getAllTaskCategory() {
@@ -30,6 +31,8 @@ export class HomeComponent implements OnInit {
     });
 
   }
+
+
 
   addTask() {
     console.log(this.schedule);
@@ -51,6 +54,11 @@ export class HomeComponent implements OnInit {
       this.message = data;
       this.isSaved = true;
     });
+  }
+  getTodaySchedule(){
+    this.service.getTodayScheduleService(this.datePipe.transform(this.myDate, 'yyyy-MM-dd')).subscribe((data) =>{
+      this.schedule = data;
+    })    
   }
 
   updateSchedule() {

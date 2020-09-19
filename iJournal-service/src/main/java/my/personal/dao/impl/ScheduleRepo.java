@@ -26,6 +26,14 @@ public class ScheduleRepo {
         }
     }
 
+    public List<TaskHistory> getTodaySchedule(Date date){
+        Query q = entityManager.createNativeQuery("select * from ijournal.schedule_hist WHERE date = ?",
+                TaskHistory.class);
+
+        q.setParameter(1, date);
+        return q.getResultList();
+    }
+
     public List<TaskHistory> getTaskHistory(final String taskName) {
         final Query q = entityManager.createNativeQuery("select * from ijournal.schedule_hist WHERE task = ?",
                 TaskHistory.class);

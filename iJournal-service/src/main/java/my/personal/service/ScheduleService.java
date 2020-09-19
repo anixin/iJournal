@@ -25,6 +25,10 @@ public class ScheduleService {
         scheduleRepo.addTodaySchedule(todaysScheduleList);
     }
 
+    public List<TaskHistory> getTodaySchedule(Date date){
+        return scheduleRepo.getTodaySchedule(date);
+    }
+
     public List<TaskHistory> getTaskHistory(String taskName) {
         return scheduleRepo.getTaskHistory(taskName);
     }

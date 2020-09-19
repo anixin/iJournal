@@ -38,6 +38,11 @@ public class ScheduleController {
         }
     }
 
+    @GetMapping(value = "/getTodaySchedule")
+    public ResponseEntity<Object> getTodaySchedule(@QueryParam("date") Date date) {
+        return new ResponseEntity<>(scheduleService.getTodaySchedule(date), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/getTaskHistory/{taskName}")
     public ResponseEntity<Object> getTaskHistory(@PathVariable String taskName) {
         return new ResponseEntity<>(scheduleService.getTaskHistory(taskName), HttpStatus.OK);
