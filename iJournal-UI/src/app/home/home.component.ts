@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
   }
 
   saveSchedule() {
-    console.log("saewwdvf clicked");
     this.service.saveTodaysScheduleService(this.schedule).subscribe((data) => {
       this.message = data;
       this.isSaved = true;
@@ -58,6 +57,9 @@ export class HomeComponent implements OnInit {
   getTodaySchedule(){
     this.service.getTodayScheduleService(this.datePipe.transform(this.myDate, 'yyyy-MM-dd')).subscribe((data) =>{
       this.schedule = data;
+      if(this.schedule.length > 0){
+        this.isSaved = true;
+      }
     })    
   }
 

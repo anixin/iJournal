@@ -1,14 +1,24 @@
 <div class="main container-fluid">
-  <mat-list>
-      <div *ngFor="let taskHistory of taskHistoryList">
-          <mat-expansion-panel  style="cursor: pointer; margin-top: 1rem;">
-              <mat-expansion-panel-header><h4>{{taskHistory.date}}</h4></mat-expansion-panel-header>
-              <mat-list-item> Work Done: {{taskHistory.workDone}} </mat-list-item>
-              <div class="time-div">
-                  <mat-list-item> Time Committed: {{taskHistory.timeCommitted}} </mat-list-item>
-              </div>
-          </mat-expansion-panel>
+    <div class="date-filter">
+        <input type="date" [(ngModel)] = "startDate" placeholder="Start Date">
+        <input type="date" [(ngModel)] = "endDate" placeholder="End Date">
+        <button type="submit" (click) = "getSchedule()">Go</button>
+    </div>
+    <mat-list>
+        <div *ngFor="let taskHistory of taskHistoryList">
+            <mat-expansion-panel hideToggle style="cursor: pointer; margin-top: 1rem;">
+                <mat-expansion-panel-header>
+                    <h4>{{taskHistory.date}}</h4>
+                </mat-expansion-panel-header>
+                <div *ngFor="let task of taskHistory.tasks">
+                    <div style="display: flex;">
+                        <mat-list-item> Task: {{task.taskName}} </mat-list-item>
+                        <mat-list-item> Work Done: {{task.workDone}} </mat-list-item>
 
-      </div>
-  </mat-list>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+        </div>
+    </mat-list>
 </div>

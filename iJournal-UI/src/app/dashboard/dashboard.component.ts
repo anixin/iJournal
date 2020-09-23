@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   private date = new Date();
   private today;
   private startDate;
+  private endDate;
   public taskHistoryList;
 
   ngOnInit() {
@@ -29,8 +30,15 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getFormattedDate(date){
-
+  getSchedule(){
+    if(this.startDate > this.endDate){
+      alert("Start date is greater");
+    }
+    this.service.getDayBatchHistoryService(this.startDate, this.endDate).subscribe((data)=>{
+      console.log(data);
+      this.taskHistoryList = data;
+    })
+    
   }
 
 }
