@@ -26,7 +26,10 @@ public class ScheduleService {
     }
 
     public List<TaskHistory> getTodaySchedule(Date date){
-        return scheduleRepo.getTodaySchedule(date);
+        List<TaskHistory> incompleteList = scheduleRepo.getYesterdayIncompleteTask();
+        List<TaskHistory> response = scheduleRepo.getTodaySchedule(date);
+        response.addAll(incompleteList);
+        return response;
     }
 
     public List<TaskHistory> getTaskHistory(String taskName) {

@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
 
 
   addTask() {
-    console.log(this.schedule);
+    this.isSaved = false;
     this.schedule.push({
       taskName: "",
       toDo: "",
@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
   getTodaySchedule(){
     this.service.getTodayScheduleService(this.datePipe.transform(this.myDate, 'yyyy-MM-dd')).subscribe((data) =>{
       this.schedule = data;
+      console.log(this.schedule);
       if(this.schedule.length > 0){
         this.isSaved = true;
       }
@@ -112,6 +113,10 @@ export class HomeComponent implements OnInit {
       w2D = data;
       this.schedule[i].toDo = w2D;
     });
+  }
+
+  removeTask(i){
+    this.schedule.splice(i,1);
   }
 
 }

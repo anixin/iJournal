@@ -17,6 +17,10 @@
             </div>
 
           </mat-card-title>
+          <div class="edit-task">
+            <button>Edit</button>
+            <button (click) = "removeTask(i)" [disabled] = "isSaved">Remove</button>
+          </div>
         </mat-card-header>
         <mat-card-content class="input-field">
           <input type="text" [(ngModel)]="task.toDo" name="toDo{{i}}" placeholder="Task for today" [(disabled)] = "isSaved">
@@ -43,7 +47,7 @@
 
     </mat-card>
     <div>
-      <img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()" *ngIf = '!isSaved'>
+      <img src="../assets/plus-icon.png" height="40px" width="40px" (click)="addTask()">
     </div>
     <div *ngIf = "schedule.length > 0">
       <button type="submit" (click)="saveSchedule()" [disabled]="isSaved">Save</button>

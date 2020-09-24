@@ -18,7 +18,9 @@ public class ScheduleRepo {
     public void addTodaySchedule(final List<TaskHistory> todaysScheduleList) throws Exception {
         try {
             for (TaskHistory schedule : todaysScheduleList) {
-                entityManager.persist(schedule);
+                if (getTodayTask(schedule.getTaskName(), schedule.getDate()).isEmpty()) {
+                    entityManager.persist(schedule);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,7 +28,16 @@ public class ScheduleRepo {
         }
     }
 
-    public List<TaskHistory> getTodaySchedule(Date date){
+    public List<TaskHistory> getTodayTask(String taskCategory, Date date) {
+        Query q = entityManager.createNativeQuery("select * from ijournal.schedule_hist WHERE task = ? AND date = ?",
+                TaskHistory.class);
+        q.setParameter(1, taskCategory);
+        q.setParameter(2, date);
+
+        return q.getResultList();
+    }
+
+    public List<TaskHistory> getTodaySchedule(Date date) {
         Query q = entityManager.createNativeQuery("select * from ijournal.schedule_hist WHERE date = ?",
                 TaskHistory.class);
 
@@ -35,8 +46,8 @@ public class ScheduleRepo {
     }
 
     public List<TaskHistory> getTaskHistory(final String taskName) {
-        final Query q = entityManager.createNativeQuery("select * from ijournal.schedule_hist WHERE task = ? ORDER BY date desc",
-                TaskHistory.class);
+        final Query q = entityManager.createNativeQuery(
+                "select * from ijournal.schedule_hist WHERE task = ? ORDER BY date desc", TaskHistory.class);
         q.setParameter(1, taskName);
 
         return q.getResultList();
@@ -44,7 +55,8 @@ public class ScheduleRepo {
 
     public List<TaskHistory> getDayBatchHistory(final Date startDate, final Date endDate) {
         final Query q = entityManager.createNativeQuery(
-                "select * from ijournal.schedule_hist WHERE date BETWEEN ? AND ? order by date desc", TaskHistory.class);
+                "select * from ijournal.schedule_hist WHERE date BETWEEN ? AND ? order by date desc",
+                TaskHistory.class);
         q.setParameter(1, startDate);
         q.setParameter(2, endDate);
 
@@ -71,10 +83,18 @@ public class ScheduleRepo {
 
     }
 
-    public String getWorkToDo(String taskCategory){
-        Query q = entityManager.createNativeQuery("select work_for_next_time from schedule_hist where task = ? order by date desc limit 1");
+    public String getWorkToDo(String taskCategory) {
+        Query q = entityManager.createNativeQuery(
+                "select work_for_next_time from schedule_hist where task = ? order by date desc limit 1");
         q.setParameter(1, taskCategory);
         return q.getSingleResult().toString();
 
+    }
+
+    public List<TaskHistory> getYesterdayIncompleteTask() {
+        Query q = entityManager.createNativeQuery(
+                "SELECT * from schedule_hist where date = SUBDATE(CURDATE(),1) AND work_done IS NULL OR LOWER(work_done) = 'none'",
+                TaskHistory.class);
+        return q.getResultList();
     }
 }
